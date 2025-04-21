@@ -1,4 +1,6 @@
 (sym_lib_table
   (version 7)
   (lib (name "LSF0204")(type "KiCad")(uri "${KIPRJMOD}/Libraries/LSF0204/LSF0204.kicad_sym")(options "")(descr ""))
+  (lib (name "0.96InchOLED")(type "KiCad")(uri "${KIPRJMOD}/Libraries/0.96 Inch OLED/0.96InchOLED.kicad_sym")(options "")(descr ""))
+  (lib (name "BMI270")(type "KiCad")(uri "${KIPRJMOD}/Libraries/BMI270/BMI270.kicad_sym")(options "")(descr ""))
 )
