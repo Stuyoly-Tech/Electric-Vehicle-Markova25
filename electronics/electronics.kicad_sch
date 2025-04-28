@@ -6115,20 +6115,12 @@
 		(uuid "10351147-e3c2-4597-8337-879011f0dec0")
 	)
 	(no_connect
-		(at 190.5 40.64)
-		(uuid "119e4e21-3622-45df-baa0-ad991e45b3a6")
-	)
-	(no_connect
 		(at 114.3 135.89)
 		(uuid "34d5fad0-6880-400f-ab33-9eb310de175e")
 	)
 	(no_connect
 		(at 114.3 133.35)
 		(uuid "549de3ec-259a-4d08-b0a8-d2f2c522b765")
-	)
-	(no_connect
-		(at 213.36 40.64)
-		(uuid "9efc8add-ea68-4ff7-b019-ddec6e7ec880")
 	)
 	(no_connect
 		(at 114.3 140.97)
@@ -6245,16 +6237,6 @@
 			(type default)
 		)
 		(uuid "07f44d7f-b846-4169-ac13-0153c309b390")
-	)
-	(wire
-		(pts
-			(xy 101.6 57.15) (xy 116.84 57.15)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "083b10c1-9d5e-4fbc-84ba-6191c584ea66")
 	)
 	(wire
 		(pts
@@ -6418,6 +6400,16 @@
 	)
 	(wire
 		(pts
+			(xy 101.6 52.07) (xy 116.84 52.07)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "193d7cdf-a64f-4354-9260-28de67022ff3")
+	)
+	(wire
+		(pts
 			(xy 88.9 146.05) (xy 85.09 146.05)
 		)
 		(stroke
@@ -6425,6 +6417,16 @@
 			(type default)
 		)
 		(uuid "1b93f0f9-e590-4992-b864-00441787ab14")
+	)
+	(wire
+		(pts
+			(xy 101.6 54.61) (xy 116.84 54.61)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1c96dd77-0f12-4f2c-bbd4-cd44a253bf63")
 	)
 	(wire
 		(pts
@@ -6455,6 +6457,16 @@
 			(type default)
 		)
 		(uuid "1df12460-e299-4ff8-aff4-e22bcfa64550")
+	)
+	(wire
+		(pts
+			(xy 101.6 59.69) (xy 116.84 59.69)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2091178e-3d1b-42ec-9a5a-16c422da8eaa")
 	)
 	(wire
 		(pts
@@ -6495,6 +6507,16 @@
 			(type default)
 		)
 		(uuid "233b0ce7-f9c9-417c-a128-5d3964fcdb32")
+	)
+	(wire
+		(pts
+			(xy 213.36 40.64) (xy 227.33 40.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "25bfc677-e201-4757-afb9-8578604bc00d")
 	)
 	(wire
 		(pts
@@ -7015,6 +7037,16 @@
 			(type default)
 		)
 		(uuid "576af50b-22eb-481a-babd-1f726afe1c53")
+	)
+	(wire
+		(pts
+			(xy 175.26 40.64) (xy 190.5 40.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "579938b1-5271-4890-a302-f0d54d8df6b8")
 	)
 	(wire
 		(pts
@@ -7678,16 +7710,6 @@
 	)
 	(wire
 		(pts
-			(xy 101.6 54.61) (xy 116.84 54.61)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "9380637a-636d-434e-9d7b-a78e84f0ef84")
-	)
-	(wire
-		(pts
 			(xy 38.1 128.27) (xy 59.69 128.27)
 		)
 		(stroke
@@ -7818,6 +7840,16 @@
 	)
 	(wire
 		(pts
+			(xy 101.6 57.15) (xy 116.84 57.15)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a4ab2304-243f-4583-bed2-3648db3ea5bd")
+	)
+	(wire
+		(pts
 			(xy 179.07 137.16) (xy 179.07 127)
 		)
 		(stroke
@@ -7905,16 +7937,6 @@
 			(type default)
 		)
 		(uuid "aad65567-372d-4fec-aa23-14e45500e2c5")
-	)
-	(wire
-		(pts
-			(xy 101.6 52.07) (xy 116.84 52.07)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "abc869b4-2c65-495c-a70e-1e03fd08f23c")
 	)
 	(wire
 		(pts
@@ -8726,6 +8748,16 @@
 		)
 		(uuid "bbb6f06d-d30a-4faf-87fb-2eef481ee826")
 	)
+	(label "3V3_LASER"
+		(at 116.84 52.07 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "011ff66b-6904-4b69-9069-2f27e632cc08")
+	)
 	(label "D+"
 		(at 223.52 91.44 180)
 		(effects
@@ -8765,6 +8797,16 @@
 			(justify left bottom)
 		)
 		(uuid "121eaf63-ef71-47eb-adf6-69fcc74d2b74")
+	)
+	(label "3V3_ENC_A"
+		(at 116.84 59.69 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "133a8d2b-2be9-43a0-a9dd-3913afa1220d")
 	)
 	(label "5V_FAN_PWM"
 		(at 234.95 46.99 0)
@@ -8806,6 +8848,16 @@
 		)
 		(uuid "223f7517-0431-4582-8b5e-17d47af88ce1")
 	)
+	(label "3V3_FAN_PWM"
+		(at 116.84 54.61 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "2506b850-fa76-4adb-a9cd-87511eb2825c")
+	)
 	(label "3V3_ENC_B"
 		(at 175.26 35.56 0)
 		(effects
@@ -8836,7 +8888,7 @@
 		)
 		(uuid "2eecce09-2b9b-4f4b-a747-d8ce57235c3c")
 	)
-	(label "5V_ENC_INDEX"
+	(label "5V_LASER"
 		(at 234.95 34.29 0)
 		(effects
 			(font
@@ -8875,6 +8927,16 @@
 			(justify left bottom)
 		)
 		(uuid "45844b48-2fce-4e51-86b2-6a16be4d9f33")
+	)
+	(label "3V3_LASER"
+		(at 175.26 40.64 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "4f9f9ad3-b1af-4c5a-a356-bbc29259a210")
 	)
 	(label "BTN1"
 		(at 113.03 72.39 180)
@@ -8946,16 +9008,6 @@
 		)
 		(uuid "836dda7e-e2ab-459a-81c3-3e11c1f251fa")
 	)
-	(label "3V3_ENC_A"
-		(at 116.84 57.15 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "894b1a9c-2b3a-4239-904f-31f2efcad3d0")
-	)
 	(label "D+"
 		(at 223.52 88.9 180)
 		(effects
@@ -8965,6 +9017,16 @@
 			(justify right bottom)
 		)
 		(uuid "8e8ce3ee-f437-4824-bac7-256a5928ccd7")
+	)
+	(label "3V3_ENC_B"
+		(at 116.84 57.15 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "909626c7-9087-4945-b037-423a1b4204dc")
 	)
 	(label "5V_FAN_PWM"
 		(at 227.33 38.1 180)
@@ -9036,6 +9098,16 @@
 		)
 		(uuid "c53f56a0-a236-4c4e-ad1b-bfdcdabf8e7a")
 	)
+	(label "5V_LASER"
+		(at 227.33 40.64 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "d218015d-f8c0-4b3f-9e26-ba9a761b2d41")
+	)
 	(label "BTN3"
 		(at 60.96 46.99 0)
 		(effects
@@ -9075,26 +9147,6 @@
 			(justify right bottom)
 		)
 		(uuid "eedf7462-3de3-4609-99b3-4ca3572737cd")
-	)
-	(label "3V3_ENC_B"
-		(at 116.84 54.61 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "f9f41187-821a-4c87-ac9a-358821a4f511")
-	)
-	(label "3V3_FAN_PWM"
-		(at 116.84 52.07 180)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right bottom)
-		)
-		(uuid "fd081215-e6bc-437e-8835-aa53c208f2f3")
 	)
 	(label "5V_ENC_B"
 		(at 234.95 26.67 0)
