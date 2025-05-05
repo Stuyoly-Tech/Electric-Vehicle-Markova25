@@ -4,7 +4,7 @@
 Controller::Controller(
   HWCDC* serial,
   volatile int* pTicks, 
-  MotionProfile* pPathProfile, DCMotor* pMotor,
+  MotionProfile* pPathProfile, BrushlessMotor* pMotor,
   ControllerPIDParams* pPIDParams, BMI270* pImu,
   FilterOnePole* pVelocityFilter, FilterOnePole* pAccelerationFilter,
   float iTicksPerMeter

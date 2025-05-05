@@ -8,7 +8,7 @@
 #include "pinout.h"
 #include "config.h"
 
-#include "DCMotor.h"
+#include "BrushlessMotor.h"
 #include "MotionProfile.h"
 #include "Controller.h"
 #include "Interface.h"
@@ -43,9 +43,9 @@ int BTN_PINS[] = { BTN0, BTN1, BTN2, BTN3 };
 bool BTN_PREV_STATES[] = { LOW, LOW, LOW, LOW };
 
 
-DCMotor MOTOR(
- M_EN, M_PH, M_IPROPI, M_NSLEEP,
- ISENSE_RESISTANCE, PWM_FREQ
+BrushlessMotor MOTOR(
+ SPARK_MAX_PWM, SPARKMAX_FULL_REVERSE, SPARKMAX_NEUTRAL_MIN, SPARKMAX_NEUTRAL_MAX,
+ SPARKMAX_FULL_FORWARD, SPARKMAX_FREQUENCY, SPARKMAX_PERIOD
 );
 
 MotionProfile MOTIONPROFILE(
@@ -225,7 +225,6 @@ void setup() {
   Serial.begin(115200);
 
   //Init pins
-  pinMode(I_CS, OUTPUT);
   pinMode(LASER, OUTPUT);
   pinMode(STATUS_LED, OUTPUT);
   pinMode(BUZZER, OUTPUT);
@@ -237,9 +236,6 @@ void setup() {
   pinMode(BTN1, INPUT);
   pinMode(BTN2, INPUT);
   pinMode(BTN3, INPUT);
-
-  //Init IMU
-  //IMU.beginSPI(I_CS, IMU_CLOCK_FREQ);
 
   //Init OLED
   OLED.begin(SSD1306_SWITCHCAPVCC, OLED_ADDR);
@@ -481,7 +477,7 @@ void loop() {
         IS_READY = false;
         digitalWrite(STATUS_LED, LOW);
         INTERFACE.runScreen(MOTIONPROFILEPARAMS.dist, OFFSET_X);
-        MOTOR.enable();
+        //MOTOR.enable();
         CONTROLLER.enable();
         CONTROLLER.start();
         T_0 = millis();

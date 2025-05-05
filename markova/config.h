@@ -1,9 +1,6 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-#define PWM_FREQ 25000
-#define ISENSE_RESISTANCE 1000
-
 #define OLED_HEIGHT 64
 #define OLED_WIDTH 128
 #define OLED_WIRE &Wire
@@ -47,6 +44,15 @@
 
 #define USE_AP true
 
+//SPARKMAX PWM RANGES (micro seconds)
+#define SPARKMAX_MIN 500
+#define SPARKMAX_FULL_REVERSE 1000
+#define SPARKMAX_NEUTRAL_MIN 1475
+#define SPARKMAX_NEUTRAL_MAX 1525
+#define SPARKMAX_FULL_FORWARD 2000
+#define SPARKMAX_FREQUENCY 200
+#define SPARKMAX_PERIOD 5000
+
 //FSM states
 #define IDLE 0
 #define RUNMENU 1
@@ -56,8 +62,5 @@
 #define READY 5
 #define RUNNING 6
 #define STOPPED 7
-
-
-
 
 #endif

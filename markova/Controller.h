@@ -6,7 +6,7 @@
 #include <SparkFun_BMI270_Arduino_Library.h>
 #include <Filters.h>
 
-#include "DCMotor.h"
+#include "BrushlessMotor.h"
 #include "MotionProfile.h"
 #include "config.h"
 
@@ -23,7 +23,7 @@ class Controller {
     HWCDC* debugSerial;
 
     volatile int* ticks;
-    DCMotor* motor;
+    BrushlessMotor* motor;
     MotionProfile* pathProfile;
 
     //IMU
@@ -59,7 +59,7 @@ class Controller {
     Controller(
       HWCDC* serial,
       volatile int* pTicks, 
-      MotionProfile* pPathProfile, DCMotor* pMotor,
+      MotionProfile* pPathProfile, BrushlessMotor* pMotor,
       ControllerPIDParams* pPIDParams, BMI270* pImu,
       FilterOnePole* pVelocityFilter, FilterOnePole* pAccelerationFilter,
       float iTicksPerMeter
