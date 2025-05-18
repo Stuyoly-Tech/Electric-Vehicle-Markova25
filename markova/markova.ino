@@ -23,6 +23,7 @@ FilterOnePole VELOCITYFILTER(LOWPASS, VEL_FREQ);
 FilterOnePole ACCELERATIONFILTER(LOWPASS, ACC_FREQ);
 
 volatile int TICKS;
+bool ticked;
 
 bool IS_READY;
 bool LASER_ON;
@@ -203,18 +204,22 @@ void updateTelemetry(void* p) {
 void encoderInterruptHandlerA() {
   if (digitalRead(ENC_A) != digitalRead(ENC_B)) {
     TICKS--;
+    ticked = !ticked;
   }
   else {
     TICKS++;
+    ticked = !ticked;
   }
 }
 
 void encoderInterruptHandlerB() {
   if (digitalRead(ENC_A) == digitalRead(ENC_B)) {
     TICKS--;
+    ticked = !ticked;
   }
   else {
     TICKS++;
+    ticked = !ticked;
   }
 }
 
@@ -236,6 +241,8 @@ void setup() {
   pinMode(BTN1, INPUT);
   pinMode(BTN2, INPUT);
   pinMode(BTN3, INPUT);
+
+  pinMode(FAN_PWM, INPUT);
 
   //Init OLED
   OLED.begin(SSD1306_SWITCHCAPVCC, OLED_ADDR);
@@ -314,6 +321,8 @@ void setup() {
 float T_0;
 
 void loop() {
+  Serial.println(ticked);
+  Serial.println(TICKS);
   yield();
   int controllerReturn = CONTROLLER.update();
   switch(STATE) {
