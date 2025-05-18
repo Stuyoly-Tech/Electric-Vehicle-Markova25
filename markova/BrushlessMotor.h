@@ -26,5 +26,4 @@ public:
   void disable();
 };
 
-
 #endif

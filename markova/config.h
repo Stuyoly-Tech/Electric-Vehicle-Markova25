@@ -33,7 +33,7 @@
 #define IMU_CLOCK_FREQ 100000
 
 //Telemetry
-#define AP_SSID "MCQUEEN"
+#define AP_SSID "MARKOVA"
 #define AP_PASS "NATS2025"
 #define NET_SSID "DOEGuest"
 #define NET_PASS "NYC$itevent"

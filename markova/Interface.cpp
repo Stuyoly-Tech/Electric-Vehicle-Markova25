@@ -66,7 +66,7 @@ void Interface::mainMenu(float dist, float offset, float aim, bool isready) {
     sprintf(rowVals[2], "OFF_X : %.3fcm", offset);
     sprintf(rowVals[3], "AIM_X : %.3fcm", aim);
     sprintf(rowVals[4], "READY : %s", (isready) ? "TRUE" : "FALSE");
-    sprintf(rowVals[5], "GOONMOBILE V1");
+    sprintf(rowVals[5], "SHITCAR V1");
     printInterface("ESRD");
 }
 
@@ -76,7 +76,7 @@ void Interface::runMenu(float dist, float offset, float aim, float runtime) {
     sprintf(rowVals[2], "OFF_X : %.3fcm", offset);
     sprintf(rowVals[3], "AIM_X : %.4fcm", aim);
     sprintf(rowVals[4], "RTIME : %.2fs", runtime);
-    sprintf(rowVals[5], "GOONMOBILE V1");
+    sprintf(rowVals[5], "SHITCAR V1");
     printInterface("OD X");
 }
 
@@ -86,7 +86,7 @@ void Interface::distMenu(float dist, float increment) {
     sprintf(rowVals[2], "INCR : %.3fm", increment);
     sprintf(rowVals[3], "\0");
     sprintf(rowVals[4], "\0");
-    sprintf(rowVals[5], "GOONMOBILE V1");
+    sprintf(rowVals[5], "SHITCAR V1");
     printInterface("+I-X");
 }
 
@@ -97,7 +97,7 @@ void Interface::offsetMenu(float offset, float increment) {
     sprintf(rowVals[2], "INCR  : %.3fcm", increment);
     sprintf(rowVals[3], "\0");
     sprintf(rowVals[4], "\0");
-    sprintf(rowVals[5], "GOONMOBILE V1");
+    sprintf(rowVals[5], "SHITCAR V1");
     printInterface("+I-X");
 }
 
@@ -107,7 +107,7 @@ void Interface::settingMenu(char* ip, bool laserstate, bool telemetrystate, int 
     sprintf(rowVals[2], "%s", ip);
     sprintf(rowVals[3], "LASER : %s", (laserstate) ? "TRUE" : "FALSE");
     sprintf(rowVals[4], "CTRLM : %d", controllermode);
-    sprintf(rowVals[5], "GOONMOBILE V1");
+    sprintf(rowVals[5], "SHITCAR V1");
     printInterface("TLCX");
 }
 
@@ -117,7 +117,7 @@ void Interface::endScreen(float dist, float t) {
     sprintf(rowVals[2], "DIST : %.3fm", dist);
     sprintf(rowVals[3], "TIME : %.2fs", t);
     sprintf(rowVals[4], "\0");
-    sprintf(rowVals[5], "GOONMOBILE V1");
+    sprintf(rowVals[5], "SHITCAR V1");
     printInterface("   X");
 }
 
@@ -128,6 +128,6 @@ void Interface::runScreen(float dist, float offset) {
     sprintf(rowVals[2], "DIST  : %.3fm", dist);
     sprintf(rowVals[3], "OFF_X : %.3fcm", offset);
     sprintf(rowVals[4], "\0");
-    sprintf(rowVals[5], "MCQUEEN V1");
+    sprintf(rowVals[5], "SHITCAR V1");
     printInterface("   X");
 }

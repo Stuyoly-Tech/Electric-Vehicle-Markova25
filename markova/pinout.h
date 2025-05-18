@@ -2,13 +2,8 @@
 #define PINOUT_H
 
 //I2C
-#define SDA 11
-#define SCL 10
-
-//SPI (not used)
-//#define MOSI 8
-//#define MISO 9
-//#define SCK 10
+#define SDA 10
+#define SCL 11
 
 //Motors
 #define SPARK_MAX_PWM 12
@@ -31,7 +26,7 @@
 //Interface
 #define BTN0 45
 #define BTN1 48
-#define BTN2 3
-#define BTN3 9
+#define BTN2 9
+#define BTN3 3
 
 #endif
