@@ -24,7 +24,7 @@
 #define KA 0
 #define KJ 0
 #define CONTRL_FREQ 2500 //in hertz
-#define TICKS_PER_METER 8020.40658113
+#define TICKS_PER_METER 3300
 #define VEL_FREQ 2
 #define ACC_FREQ 2
 

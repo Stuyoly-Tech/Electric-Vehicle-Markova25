@@ -46,10 +46,10 @@ float BrushlessMotor::get_pulse_width(float p) {
 	n = abs(p * (full_forward_pulse - neutral_max_pulse));
 
 	if(p<0){
-		return center - neutral_radius - n;
+		return center - neutral_radius + n;
 	}
 	if(p>0){
-		return center + neutral_radius + n;
+		return center + neutral_radius - n;
 	}
 
 }

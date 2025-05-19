@@ -23,7 +23,6 @@ FilterOnePole VELOCITYFILTER(LOWPASS, VEL_FREQ);
 FilterOnePole ACCELERATIONFILTER(LOWPASS, ACC_FREQ);
 
 volatile int TICKS;
-bool ticked;
 
 bool IS_READY;
 bool LASER_ON;
@@ -204,22 +203,18 @@ void updateTelemetry(void* p) {
 void encoderInterruptHandlerA() {
   if (digitalRead(ENC_A) != digitalRead(ENC_B)) {
     TICKS--;
-    ticked = !ticked;
   }
   else {
     TICKS++;
-    ticked = !ticked;
   }
 }
 
 void encoderInterruptHandlerB() {
   if (digitalRead(ENC_A) == digitalRead(ENC_B)) {
-    TICKS--;
-    ticked = !ticked;
+    TICKS++;
   }
   else {
-    TICKS++;
-    ticked = !ticked;
+    TICKS--;
   }
 }
 
@@ -242,7 +237,7 @@ void setup() {
   pinMode(BTN2, INPUT);
   pinMode(BTN3, INPUT);
 
-  pinMode(FAN_PWM, INPUT);
+  pinMode(FAN_PWM, OUTPUT);
 
   //Init OLED
   OLED.begin(SSD1306_SWITCHCAPVCC, OLED_ADDR);
@@ -305,10 +300,9 @@ void setup() {
 
   //Print start menu
   INTERFACE.mainMenu(MOTIONPROFILEPARAMS.dist, OFFSET_X, AIM_X, IS_READY);
-
   //Attach interrupts
   attachInterrupt(digitalPinToInterrupt(ENC_A), encoderInterruptHandlerA, RISING);
-  attachInterrupt(digitalPinToInterrupt(ENC_B), encoderInterruptHandlerB, RISING);
+  //attachInterrupt(digitalPinToInterrupt(ENC_B), encoderInterruptHandlerB, RISING);
 
   //Beep buzzer
   beep();
@@ -321,9 +315,8 @@ void setup() {
 float T_0;
 
 void loop() {
-  Serial.println(ticked);
-  Serial.println(TICKS);
   yield();
+  Serial.println(TICKS);
   int controllerReturn = CONTROLLER.update();
   switch(STATE) {
     case IDLE:

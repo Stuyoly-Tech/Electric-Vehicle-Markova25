@@ -10,7 +10,7 @@
 #define FAN_PWM 36
 
 //Laser
-#define LASER 35
+#define LASER 
 
 //Buzzer
 #define BUZZER 1
