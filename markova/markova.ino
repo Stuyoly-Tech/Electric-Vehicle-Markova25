@@ -28,7 +28,7 @@ bool IS_READY;
 bool LASER_ON;
 volatile bool TELEM_ENABLED;
 
-float OFFSET_X;
+float TIME;
 float AIM_X;
 
 int STATE;
@@ -36,11 +36,13 @@ int STATE;
 float DELTA_X_OPTIONS[] = { 1, 0.5, 0.1, 0.01, 0.001 };
 int DELTA_X_I;
 
-float OFF_X_OPTIONS[] = { 10, 1, 0.1, 0.01, 0.001 };
-int OFF_X_I;
+float TIME_OPTIONS[] = {1, 0.5, 0.1, 0.01 };
+int TIME_I;
 
 int BTN_PINS[] = { BTN0, BTN1, BTN2, BTN3 };
 bool BTN_PREV_STATES[] = { LOW, LOW, LOW, LOW };
+
+float DIST_OFF;
 
 
 BrushlessMotor MOTOR(
@@ -292,14 +294,14 @@ void setup() {
 
   //Indexing
   DELTA_X_I = 0;
-  OFF_X_I = 1;
+  TIME_I = 1;
   
   //Offets
-  OFFSET_X = 0;
+  TIME = 10;
   AIM_X = 0;
 
   //Print start menu
-  INTERFACE.mainMenu(MOTIONPROFILEPARAMS.dist, OFFSET_X, AIM_X, IS_READY);
+  INTERFACE.mainMenu(MOTIONPROFILEPARAMS.dist, TIME, AIM_X, IS_READY);
   //Attach interrupts
   attachInterrupt(digitalPinToInterrupt(ENC_A), encoderInterruptHandlerA, RISING);
   //attachInterrupt(digitalPinToInterrupt(ENC_B), encoderInterruptHandlerB, RISING);
@@ -316,16 +318,18 @@ float T_0;
 
 void loop() {
   yield();
-  Serial.println(TICKS);
   int controllerReturn = CONTROLLER.update();
+
   switch(STATE) {
     case IDLE:
       //Enable
       if (get_btn_state(0, BTN_PINS, BTN_PREV_STATES)) {
-        MOTIONPROFILE.generateMotionProfiles();
+        DIST_OFF = get_offset_y(MOTIONPROFILEPARAMS.dist);
+        MOTIONPROFILEPARAMS.dist += DIST_OFF;
+        MOTIONPROFILE.generateMotionProfiles(TIME);
         IS_READY = true;
         digitalWrite(STATUS_LED, HIGH);
-        INTERFACE.mainMenu(MOTIONPROFILEPARAMS.dist, OFFSET_X, AIM_X, IS_READY);
+        INTERFACE.mainMenu(MOTIONPROFILEPARAMS.dist, TIME, AIM_X, IS_READY);
         STATE = READY;
         vTaskDelay(10/portTICK_PERIOD_MS);
       }
@@ -337,7 +341,7 @@ void loop() {
       }
       //Run Menu
       else if (get_btn_state(2, BTN_PINS, BTN_PREV_STATES)) {
-        INTERFACE.runMenu(MOTIONPROFILEPARAMS.dist, OFFSET_X, AIM_X, MOTIONPROFILE.pathDuration);
+        INTERFACE.runMenu(MOTIONPROFILEPARAMS.dist, TIME, AIM_X, MOTIONPROFILE.pathDuration);
         STATE = RUNMENU;
         vTaskDelay(10/portTICK_PERIOD_MS);
       }
@@ -359,7 +363,7 @@ void loop() {
       }
       //Back to main menu
       else if (get_btn_state(2, BTN_PINS, BTN_PREV_STATES)) {
-        INTERFACE.mainMenu(MOTIONPROFILEPARAMS.dist, OFFSET_X, AIM_X, IS_READY);
+        INTERFACE.mainMenu(MOTIONPROFILEPARAMS.dist, TIME, AIM_X, IS_READY);
         STATE = IDLE;
         vTaskDelay(10/portTICK_PERIOD_MS);
       }
@@ -371,11 +375,11 @@ void loop() {
       break;
 
     case RUNMENU:
-      //Offset Menu
+      //Time Menu
       if (get_btn_state(0, BTN_PINS, BTN_PREV_STATES)) {
-        OFF_X_I = 0;
-        INTERFACE.offsetMenu(OFFSET_X, OFF_X_OPTIONS[OFF_X_I]);
-        STATE = OFFSET;
+        TIME_I = 0;
+        INTERFACE.timeMenu(TIME, TIME_OPTIONS[TIME_I]);
+        STATE = TIMEMENU;
         vTaskDelay(10/portTICK_PERIOD_MS);
       }
       //Distance Menu
@@ -387,7 +391,7 @@ void loop() {
       }
       //Run Menu
       else if (get_btn_state(2, BTN_PINS, BTN_PREV_STATES)) {
-        INTERFACE.mainMenu(MOTIONPROFILEPARAMS.dist, OFFSET_X, AIM_X, IS_READY);
+        INTERFACE.mainMenu(MOTIONPROFILEPARAMS.dist, TIME, AIM_X, IS_READY);
         STATE = IDLE;
         vTaskDelay(10/portTICK_PERIOD_MS);
       }
@@ -409,7 +413,7 @@ void loop() {
       }
       //Run Menu
       else if (get_btn_state(2, BTN_PINS, BTN_PREV_STATES)) {
-        INTERFACE.runMenu(MOTIONPROFILEPARAMS.dist, OFFSET_X, AIM_X, MOTIONPROFILE.pathDuration);
+        INTERFACE.runMenu(MOTIONPROFILEPARAMS.dist, TIME, AIM_X, MOTIONPROFILE.pathDuration);
         STATE = RUNMENU;
         vTaskDelay(10/portTICK_PERIOD_MS);
       }
@@ -421,30 +425,30 @@ void loop() {
       } 
       break;
 
-    case OFFSET:
+    case TIMEMENU:
       //+
       if (get_btn_state(0, BTN_PINS, BTN_PREV_STATES)) {
-        OFFSET_X += OFF_X_OPTIONS[OFF_X_I];
-        INTERFACE.offsetMenu(OFFSET_X, OFF_X_OPTIONS[OFF_X_I]);
+        TIME += TIME_OPTIONS[TIME_I];
+        INTERFACE.timeMenu(TIME, TIME_OPTIONS[TIME_I]);
         vTaskDelay(10/portTICK_PERIOD_MS);
       }
       //Change Increment
       else if (get_btn_state(1, BTN_PINS, BTN_PREV_STATES)) {
-        OFF_X_I++;
-        OFF_X_I %= 5;
-        INTERFACE.offsetMenu(OFFSET_X, OFF_X_OPTIONS[OFF_X_I]);
+        TIME_I++;
+        TIME_I %= 4;
+        INTERFACE.timeMenu(TIME, TIME_OPTIONS[TIME_I]);
         vTaskDelay(10/portTICK_PERIOD_MS);
       }
       //Run Menu
       else if (get_btn_state(2, BTN_PINS, BTN_PREV_STATES)) {
-        INTERFACE.runMenu(MOTIONPROFILEPARAMS.dist, OFFSET_X, AIM_X, MOTIONPROFILE.pathDuration);
+        INTERFACE.runMenu(MOTIONPROFILEPARAMS.dist, TIME, AIM_X, MOTIONPROFILE.pathDuration);
         STATE = RUNMENU;
         vTaskDelay(10/portTICK_PERIOD_MS);
       }
       //-
       else if (get_btn_state(3, BTN_PINS, BTN_PREV_STATES)) {
-        OFFSET_X -= OFF_X_OPTIONS[OFF_X_I];
-        INTERFACE.offsetMenu(OFFSET_X, OFF_X_OPTIONS[OFF_X_I]);
+        TIME -= TIME_OPTIONS[TIME_I];
+        INTERFACE.timeMenu(TIME, TIME_OPTIONS[TIME_I]);
         vTaskDelay(10/portTICK_PERIOD_MS);
       } 
       break;
@@ -454,7 +458,8 @@ void loop() {
       if (get_btn_state(0, BTN_PINS, BTN_PREV_STATES)) {
         IS_READY = false;
         digitalWrite(STATUS_LED, LOW);
-        INTERFACE.mainMenu(MOTIONPROFILEPARAMS.dist, OFFSET_X, AIM_X, IS_READY);
+        MOTIONPROFILEPARAMS.dist -= DIST_OFF;
+        INTERFACE.mainMenu(MOTIONPROFILEPARAMS.dist, TIME, AIM_X, IS_READY);
         STATE = IDLE;
         vTaskDelay(10/portTICK_PERIOD_MS);
       }
@@ -470,7 +475,7 @@ void loop() {
       else if (get_btn_state(2, BTN_PINS, BTN_PREV_STATES)) {
         IS_READY = false;
         digitalWrite(STATUS_LED, LOW);
-        INTERFACE.runMenu(MOTIONPROFILEPARAMS.dist, OFFSET_X, AIM_X, MOTIONPROFILE.pathDuration);
+        INTERFACE.runMenu(MOTIONPROFILEPARAMS.dist, TIME, AIM_X, MOTIONPROFILE.pathDuration);
         STATE = RUNMENU;
         vTaskDelay(10/portTICK_PERIOD_MS);
       }
@@ -478,8 +483,10 @@ void loop() {
       else if (get_btn_state(3, BTN_PINS, BTN_PREV_STATES)) {
         IS_READY = false;
         digitalWrite(STATUS_LED, LOW);
-        INTERFACE.runScreen(MOTIONPROFILEPARAMS.dist, OFFSET_X);
-        //MOTOR.enable();
+        digitalWrite(LASER, LOW);
+        INTERFACE.runScreen(MOTIONPROFILEPARAMS.dist, TIME);
+        //MOTIONPROFILEPARAMS.dist += get_offset_y(MOTIONPROFILEPARAMS.dist);
+        MOTOR.enable();
         CONTROLLER.enable();
         CONTROLLER.start();
         T_0 = millis();
@@ -500,9 +507,12 @@ void loop() {
       
     case STOPPED:
       if(get_btn_state(2, BTN_PINS, BTN_PREV_STATES)) {
+        CONTROLLER.disable();
+        MOTOR.disable();
         CONTROLLER.init();
         MOTIONPROFILE.clearMotionProfile();
-        INTERFACE.mainMenu(MOTIONPROFILEPARAMS.dist, OFFSET_X, AIM_X, IS_READY);
+        MOTIONPROFILEPARAMS.dist -= DIST_OFF;
+        INTERFACE.mainMenu(MOTIONPROFILEPARAMS.dist, TIME, AIM_X, IS_READY);
         STATE = IDLE;
         vTaskDelay(10/portTICK_PERIOD_MS);
       }
@@ -510,5 +520,5 @@ void loop() {
     default:
       break;
   }
-}
 
+}

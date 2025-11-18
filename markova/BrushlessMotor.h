@@ -12,6 +12,7 @@ private:
   uint32_t period;
   uint32_t center;
   uint32_t neutral_radius;
+  bool isEnabled;
 public:
   BrushlessMotor(
     uint8_t iOut,
@@ -24,6 +25,7 @@ public:
   void set_power(float p);
   float get_pulse_width(float p);
   void disable();
+  void enable();
 };
 
 #endif

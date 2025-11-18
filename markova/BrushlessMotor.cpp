@@ -20,20 +20,25 @@ BrushlessMotor::BrushlessMotor(
 	center = (full_reverse_pulse + full_forward_pulse) / 2;
 	neutral_radius = center - neutral_min_pulse;
 
+	isEnabled = false;
+
 	pinMode(out, OUTPUT);
 	ledcAttach(out, freq, 10);
 }
 
 void BrushlessMotor::set_power(float p) {
+	if (isEnabled) {
+		if (abs(p) > 1) {
+			p /= p;
+		}
 
-	if (abs(p) > 1) {
-		p /= p;
+		uint32_t duty = (uint32_t)((get_pulse_width(p) / period) * (pow(2, 10) - 1));
+
+		ledcWrite(out, duty);
 	}
-
-
-	uint32_t duty = (uint32_t)((get_pulse_width(p) / period) * (pow(2, 10) - 1));
-
-	ledcWrite(out, duty);
+	//else {
+	//	ledcWrite(out, (uint32_t)((get_pulse_width(0) / period) * (pow(2, 10) - 1)));
+	//}
 }
 
 float BrushlessMotor::get_pulse_width(float p) {
@@ -55,5 +60,11 @@ float BrushlessMotor::get_pulse_width(float p) {
 }
 
 void BrushlessMotor::disable(){
-	set_power(0);
+	isEnabled = false;
+	ledcDetach(out);
+}
+
+void BrushlessMotor::enable() {
+	isEnabled = true;
+	ledcAttach(out, freq, 10);
 }

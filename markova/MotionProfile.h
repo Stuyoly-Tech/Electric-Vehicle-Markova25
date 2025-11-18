@@ -19,7 +19,6 @@ struct MotionProfileParameters {
 class MotionProfile {
   private:
     HWCDC* debugSerial;
-    MotionProfileParameters* params;
 
     float xTable[MOTION_PROFILE_TABLE_SIZE];
     float vTable[MOTION_PROFILE_TABLE_SIZE];
@@ -29,9 +28,10 @@ class MotionProfile {
   public:
     int numIntervals;
     float pathDuration;
+    MotionProfileParameters* params;
 
     MotionProfile(HWCDC* serial, MotionProfileParameters* pParams);
-    int generateMotionProfiles();
+    int generateMotionProfiles(float t);
     float getPositionProfile(float t);
     float getVelocityProfile(float t);
     float getAccelerationProfile(float t);

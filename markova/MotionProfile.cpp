@@ -9,7 +9,7 @@ MotionProfile::MotionProfile(HWCDC* serial, MotionProfileParameters* pParams) {
   clearMotionProfile();
 }
 
-int MotionProfile::generateMotionProfiles() {
+int MotionProfile::generateMotionProfiles(float t) {
   int return_val = 1;
   float secondsPerInterval = params->secondsPerInterval;
   float initialDelay = params->initialDelay;
@@ -19,6 +19,9 @@ int MotionProfile::generateMotionProfiles() {
   float v = params->vMax;
   float a = params->aMax;
   float j = params->jMax;
+
+  v = (a*t - a*sqrt(sq(t)-4*d/a))/2;
+
 
   // If the target velocity is too high
   if ((pow(v, 2) * j + v * pow(a, 2)) / (a * j) > d) {

@@ -20,7 +20,7 @@ class Interface {
         void mainMenu(float dist, float offset, float aim, bool isready);
         void runMenu(float dist, float offset, float aim, float runtime);
         void distMenu(float dist, float increment);
-        void offsetMenu(float offset, float increment);
+        void timeMenu(float time, float increment);
         void settingMenu(char* ip, bool laserstate, bool telemetrystate, int controllermode);
         void endScreen(float dist, float t);
         void runScreen(float dist, float offset);

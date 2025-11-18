@@ -52,7 +52,9 @@ void Controller::disable() {
 
 void Controller::start() {
   init();
+  noInterrupts();
   ticksOffset = *ticks;
+  interrupts();
 }
 
 int Controller::update() {
@@ -62,7 +64,9 @@ int Controller::update() {
 
   if (delta_t > PIDParams->updatePeriod) {
     //Calculate kinematic values
+    noInterrupts();
     float newPos = ticks_to_meters(*ticks - ticksOffset, ticksPerMeter);
+    interrupts();
     float newVel = (newPos - currentPos)/delta_t;
     velocityFilter->input(newVel);
     float newAcc = (velocityFilter->output() - currentVel)/delta_t;
@@ -106,8 +110,8 @@ int Controller::update() {
     return 1;
   }
   
-  if (t >= pathProfile->pathDuration) {
-    return (abs(currentPos - profPosSet) > STOP_RANGE);
+  if (t >= 0) {
+    return (abs(currentPos - pathProfile->params->dist) > STOP_RANGE);
   }
 
   return isEnabled;

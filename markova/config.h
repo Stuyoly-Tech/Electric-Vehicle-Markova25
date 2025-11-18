@@ -11,20 +11,20 @@
 #define INITIAL_DELAY 0
 
 //Kinematics
-#define MAX_VEL 2.77
-#define MAX_ACC 2.25
-#define MAX_JERK 5
-#define STOP_RANGE 0.005
+#define MAX_VEL 20
+#define MAX_ACC 0.5
+#define MAX_JERK 30
+#define STOP_RANGE 0.01
 
 //Control
-#define KP 2.5
-#define KP_I 0.2485
-#define KP_D 1.725
+#define KP 2.75
+#define KP_I 0.0025
+#define KP_D 0.125
 #define KV 0
 #define KA 0
 #define KJ 0
 #define CONTRL_FREQ 2500 //in hertz
-#define TICKS_PER_METER 3300
+#define TICKS_PER_METER 3240.0
 #define VEL_FREQ 2
 #define ACC_FREQ 2
 
@@ -47,8 +47,8 @@
 //SPARKMAX PWM RANGES (micro seconds)
 #define SPARKMAX_MIN 500
 #define SPARKMAX_FULL_REVERSE 1000
-#define SPARKMAX_NEUTRAL_MIN 1475
-#define SPARKMAX_NEUTRAL_MAX 1525
+#define SPARKMAX_NEUTRAL_MIN 1500
+#define SPARKMAX_NEUTRAL_MAX 1500
 #define SPARKMAX_FULL_FORWARD 2000
 #define SPARKMAX_FREQUENCY 200
 #define SPARKMAX_PERIOD 5000
@@ -57,7 +57,7 @@
 #define IDLE 0
 #define RUNMENU 1
 #define DISTSET 2
-#define OFFSET 3
+#define TIMEMENU 3
 #define SETTINGS 4
 #define READY 5
 #define RUNNING 6

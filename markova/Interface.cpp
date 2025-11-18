@@ -2,6 +2,7 @@
 
 #include "config.h"
 #include "Interface.h"
+#include "utils.h"
 
 void Interface::printInterface(char* letterings) {
     display->clearDisplay();
@@ -60,24 +61,26 @@ Interface::Interface(Adafruit_SSD1306* iDisplay, int iScreenWidth, int iScreenHe
     }
 }
 
-void Interface::mainMenu(float dist, float offset, float aim, bool isready) {
+void Interface::mainMenu(float dist, float time, float aim, bool isready) {
     sprintf(rowVals[0], "MAIN");
     sprintf(rowVals[1], "DIST  : %.3fm", dist);
-    sprintf(rowVals[2], "OFF_X : %.3fcm", offset);
+    sprintf(rowVals[2], "TIME : %.3fs", time);
+    aim = get_offset_x(dist);
     sprintf(rowVals[3], "AIM_X : %.3fcm", aim);
     sprintf(rowVals[4], "READY : %s", (isready) ? "TRUE" : "FALSE");
     sprintf(rowVals[5], "SHITCAR V1");
     printInterface("ESRD");
 }
 
-void Interface::runMenu(float dist, float offset, float aim, float runtime) {
+void Interface::runMenu(float dist, float time, float aim, float runtime) {
     sprintf(rowVals[0], "RUNCONF");
     sprintf(rowVals[1], "DIST  : %.3fm", dist);
-    sprintf(rowVals[2], "OFF_X : %.3fcm", offset);
+    sprintf(rowVals[2], "TIME : %.3fs", time);
+    aim = get_offset_x(dist);
     sprintf(rowVals[3], "AIM_X : %.4fcm", aim);
     sprintf(rowVals[4], "RTIME : %.2fs", runtime);
     sprintf(rowVals[5], "SHITCAR V1");
-    printInterface("OD X");
+    printInterface("TD X");
 }
 
 void Interface::distMenu(float dist, float increment) {
@@ -91,10 +94,10 @@ void Interface::distMenu(float dist, float increment) {
 }
 
 //In cm
-void Interface::offsetMenu(float offset, float increment) {
-    sprintf(rowVals[0], "OFFSET");
-    sprintf(rowVals[1], "OFF_X : %.3fcm", offset);
-    sprintf(rowVals[2], "INCR  : %.3fcm", increment);
+void Interface::timeMenu(float time, float increment) {
+    sprintf(rowVals[0], "TIME");
+    sprintf(rowVals[1], "TIME : %.3fs", time);
+    sprintf(rowVals[2], "INCR  : %.3fs", increment);
     sprintf(rowVals[3], "\0");
     sprintf(rowVals[4], "\0");
     sprintf(rowVals[5], "SHITCAR V1");
@@ -122,11 +125,11 @@ void Interface::endScreen(float dist, float t) {
 }
 
 
-void Interface::runScreen(float dist, float offset) {
+void Interface::runScreen(float dist, float time) {
     sprintf(rowVals[0], "RUNNING");
     sprintf(rowVals[1], "\0");
     sprintf(rowVals[2], "DIST  : %.3fm", dist);
-    sprintf(rowVals[3], "OFF_X : %.3fcm", offset);
+    sprintf(rowVals[3], "TIME : %.3fs", time);
     sprintf(rowVals[4], "\0");
     sprintf(rowVals[5], "SHITCAR V1");
     printInterface("   X");

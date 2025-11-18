@@ -20,3 +20,15 @@ bool get_btn_state(int index, int *btn_pins, bool* btn_states) {
   return false;
 }
 
+float get_offset_y(float dist){
+	float A = .0275;
+	float B = -0.02;
+	return A * dist + B;
+	
+}
+
+float get_offset_x(float dist){
+	float A = 14. / 3.;
+	float B = -50. / 3.;
+	return A * dist + B;
+}
